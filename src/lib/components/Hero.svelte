@@ -1,3 +1,4 @@
+<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 <div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
 
 	<!-- Top blob -->
@@ -28,6 +29,7 @@
 			Built from the ground up to support the open source projects we love, and the communities around them.			</p>
 			<div class="mt-10 flex items-center justify-center gap-4 flex-wrap">
 				<a
+
 					href="/pricing"
 					class="text-sm font-medium text-fyra-gray-300 transition-colors duration-100 hover:text-fyra-gray-50"
 				>

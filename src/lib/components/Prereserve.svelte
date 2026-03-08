@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import { vpsPlans } from '$lib/components/VPSPlans.svelte';
 	import { colocationPlans } from '$lib/data/colocationPlans';
 
@@ -19,7 +20,9 @@
 
 	let submitting = $state(false);
 	let submitted = $state(false);
-	let submitError = $state<string | null>(null);
+
+	let toast = $state<{ type: 'success' | 'error'; title: string; message: string } | null>(null);
+	let toastTimer: ReturnType<typeof setTimeout> | null = null;
 
 	let planDropdownOpen = $state(false);
 	let planDropdownEl = $state<HTMLDivElement | null>(null);
@@ -28,9 +31,19 @@
 		plan = selectedPlanName;
 	});
 
+	function showToast(type: 'success' | 'error', title: string, message: string) {
+		if (toastTimer) clearTimeout(toastTimer);
+		toast = { type, title, message };
+		toastTimer = setTimeout(() => { toast = null; }, 6000);
+	}
+
+	function dismissToast() {
+		if (toastTimer) clearTimeout(toastTimer);
+		toast = null;
+	}
+
 	async function handleSubmit() {
 		submitting = true;
-		submitError = null;
 
 		try {
 			const res = await fetch('/api/prereserve', {
@@ -41,12 +54,13 @@
 
 			if (res.ok) {
 				submitted = true;
+				showToast('success', "You're on the list.", `We got your reservation for ${plan} and will be in touch at ${email}.`);
 			} else {
 				const data = await res.json().catch(() => ({}));
-				submitError = data.error ?? 'Something went wrong. Please try again.';
+				showToast('error', 'Submission failed.', data.error ?? 'Something went wrong. Please try again.');
 			}
 		} catch {
-			submitError = 'Network error. Please try again.';
+			showToast('error', 'Network error.', 'Could not reach the server. Please try again.');
 		} finally {
 			submitting = false;
 		}
@@ -61,11 +75,41 @@
 	onkeydown={(e) => { if (e.key === 'Escape') planDropdownOpen = false; }}
 />
 
-<div class="">
-	<div class="grid grid-cols-1 divide-t divide-fyra-gray-800 lg:grid-cols-7 lg:divide-x lg:divide-y-0">
+<!-- Toast -->
+{#if toast}
+	<div transition:fly={{ y: 16, duration: 200 }} class="fixed bottom-6 right-6 z-50 flex w-80 items-start gap-3 border border-fyra-gray-700 bg-fyra-gray-900 px-4 py-4 shadow-xl">
+		{#if toast.type === 'success'}
+			<svg class="mt-0.5 h-4 w-4 shrink-0 text-fyra-red-400" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M13.5 4.5 6.5 11.5 3 8" />
+			</svg>
+		{:else}
+			<svg class="mt-0.5 h-4 w-4 shrink-0 text-fyra-red-500" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="M8 3v5M8 11.5v.5" />
+				<circle cx="8" cy="8" r="6.5" />
+			</svg>
+		{/if}
+		<div class="flex-1 min-w-0">
+			<p class="text-sm font-medium text-fyra-gray-50">{toast.title}</p>
+			<p class="mt-0.5 text-sm text-fyra-gray-400">{toast.message}</p>
+		</div>
+		<button
+			type="button"
+			onclick={dismissToast}
+			class="shrink-0 text-fyra-gray-600 transition-colors duration-100 hover:text-fyra-gray-300"
+			aria-label="Dismiss"
+		>
+			<svg class="h-3.5 w-3.5" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+				<path d="M2 2 8 8M8 2 2 8" />
+			</svg>
+		</button>
+	</div>
+{/if}
 
-		<!-- Left: header + form -->
-		<div class="col-span-1 lg:col-span-5">
+<section class="border-b border-fyra-gray-800">
+	<div>
+
+		<!-- Form -->
+		<div>
 			<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 				<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
 					{serviceType === 'colocation' ? 'Pre-reserve your colocation.' : 'Pre-reserve your VPS.'}
@@ -74,18 +118,6 @@
 			</div>
 
 			<div class="px-6 py-8 md:px-10">
-
-				{#if submitted}
-					<div class="mb-6 flex items-start gap-3 border border-fyra-gray-700 bg-fyra-gray-800 px-4 py-4">
-						<svg class="mt-0.5 h-4 w-4 shrink-0 text-fyra-red-400" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-							<path d="M13.5 4.5 6.5 11.5 3 8" />
-						</svg>
-						<div>
-							<p class="text-sm font-medium text-fyra-gray-50">You're on the list.</p>
-							<p class="mt-0.5 text-sm text-fyra-gray-400">We got your reservation for <span class="text-fyra-gray-100">{plan}</span> and will be in touch at <span class="text-fyra-gray-100">{email}</span>.</p>
-						</div>
-					</div>
-				{/if}
 
 				<div class="flex flex-col gap-6">
 
@@ -194,10 +226,7 @@
 					</div>
 
 					<!-- Submit -->
-					<div class="flex flex-col gap-3">
-						{#if submitError}
-							<p class="text-sm text-fyra-red-500">{submitError}</p>
-						{/if}
+					<div>
 						<button
 							type="button"
 							onclick={handleSubmit}
@@ -218,16 +247,5 @@
 			</div>
 		</div>
 
-		<!-- Right: decorative panel (desktop only) -->
-		<div class="relative hidden overflow-hidden lg:flex lg:items-center lg:justify-center col-span-1 lg:col-span-2 ">
-			<img
-				src="/stack-pattern.svg"
-				alt=""
-				class="absolute inset-0 h-full w-full object-cover opacity-[0.12]"
-				aria-hidden="true"
-			/>
-
-		</div>
-
 	</div>
-</div>
+</section>

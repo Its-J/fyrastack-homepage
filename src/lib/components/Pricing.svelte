@@ -2,8 +2,9 @@
 	const plans = [
 		{
 			name: 'Virtual Private Servers',
+			slug: 'vps',
 			price: '5',
-			description: 'Starting at STACK-XXS · scales to $34/mo.',
+			description: 'Scales to $34/mo.',
 			features: [
 				'Intel Cascade Lake vCPUs',
 				'NVMe SSD storage',
@@ -17,8 +18,9 @@
 		},
 		{
 			name: 'Server Colocation',
+			slug: 'colocation',
 			price: '50',
-			description: 'Starting at STACK-1U · scales to $200/mo.',
+			description: 'Scales to $200/mo.',
 			features: [
 				'Up to 4U rackspace',
 				'Up to 500W power budget',
@@ -34,6 +36,7 @@
 </script>
 
 <section class="border-b border-fyra-gray-800">
+
 	<!-- Header -->
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 		<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
@@ -42,33 +45,36 @@
 		<p class="mt-2 text-sm text-fyra-gray-400">Simple, flat-rate plans. No surprise fees.</p>
 	</div>
 
-	<!-- Cards -->
-	<div class="grid grid-cols-1 divide-y divide-fyra-gray-800 md:grid-cols-2 md:divide-x md:divide-y-0">
+	<!-- Plans -->
+	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 md:grid-cols-2">
 		{#each plans as plan}
-			<div class="flex flex-col gap-6 pb-8 p-6 md:p-8 lg:p-10">
-				<!-- Service name -->
-				<p class="text-sm font-medium text-fyra-gray-400">{plan.name}</p>
+			<div class="flex flex-col bg-fyra-gray-900">
 
-				<!-- Price -->
-				<div>
-					<div class="flex items-end gap-0.5">
-						<span class="text-2xl font-medium text-fyra-gray-400">$</span>
-						<span class="text-7xl font-bold leading-none tracking-tight text-fyra-gray-50">{plan.price}</span>
-						<span class="mb-1.5 text-lg font-medium text-fyra-gray-400">/mo</span>
+				<!-- Price block -->
+				<div class="flex items-end justify-between gap-4 border-b border-fyra-gray-800 px-6 py-8 md:px-10">
+					<div>
+						<p class="text-[11px] font-medium uppercase tracking-widest text-fyra-gray-500">{plan.name}</p>
+						<div class="mt-3 flex items-baseline gap-1">
+							<span class="text-4xl font-bold tracking-tight text-fyra-gray-50">${plan.price}</span>
+							<span class="text-sm font-medium text-fyra-gray-500">/mo</span>
+						</div>
+						<p class="mt-1 text-sm text-fyra-gray-600">{plan.description}</p>
 					</div>
-					<p class="mt-3 text-sm text-fyra-gray-500">{plan.description}</p>
+					<a
+						href="/services/{plan.slug}"
+						class="shrink-0 text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
+					>
+						View plans <span aria-hidden="true">→</span>
+					</a>
 				</div>
 
-				<!-- Divider -->
-				<div class="border-t border-fyra-gray-800"></div>
-
 				<!-- Features -->
-				<ul class="flex flex-col gap-3">
+				<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2">
 					{#each plan.features as feature}
-						<li class="flex items-center gap-3">
+						<div class="flex items-center gap-3 bg-fyra-gray-900 px-6 py-3.5 md:px-10">
 							<svg
-								class="h-3.5 w-3.5 shrink-0 text-fyra-red-400"
-								viewBox="0 0 14 14"
+								class="h-3 w-3 shrink-0 text-fyra-red-500"
+								viewBox="0 0 12 12"
 								fill="none"
 								stroke="currentColor"
 								stroke-width="2"
@@ -76,14 +82,15 @@
 								stroke-linejoin="round"
 								aria-hidden="true"
 							>
-								<path d="M12 3.5 5.5 10 2 6.5" />
+								<path d="M10.5 3 5 8.5 1.5 5" />
 							</svg>
-							<span class="text-sm text-fyra-gray-300">{feature}</span>
-						</li>
+							<span class="text-sm text-fyra-gray-400">{feature}</span>
+						</div>
 					{/each}
-				</ul>
+				</div>
 
-	</div>
+			</div>
 		{/each}
 	</div>
+
 </section>
