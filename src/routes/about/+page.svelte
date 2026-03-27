@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { team } from '$lib/data/team';
-
 	const members = team.filter((m) => m !== null);
+
 
 	function displayName(m: typeof members[number]) {
 		if (!m.nickname) return m.name;
@@ -27,13 +27,13 @@
 
 	<div class="mx-auto max-w-4xl py-24 sm:py-32 text-center">
 		<h1 class="text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50  sm:text-6xl mb-2">
-		We run servers.		</h1>
+		Cloud Infrastructure,		</h1>
 		<h2 class="text-4xl font-semibold tracking-tight text-balance text-fyra-gray-50  sm:text-6xl mb-8">
-		<span class="text-fyra-red-400">We use them too.</span>
+		<span class="text-fyra-red-400">for the rest of us.</span>
 		</h2>
 		<p class="text-base text-fyra-gray-400 sm:text-lg/7 max-w-lg mx-auto">
-		We're a small team in Minnesota that runs bare metal servers and charges a fair price for them. That's the whole thing.		</p>
-	</div>
+		An open-source cloud from the folks who make Ultramarine Linux and Terra.
+		</p>	</div>
 
 	<div aria-hidden="true" class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
 		<div
@@ -47,7 +47,7 @@
 <!-- Stat strip -->
 <div class="grid grid-cols-1 gap-px bg-fyra-gray-800 border-b border-fyra-gray-800 md:grid-cols-3">
 	{#each [
-		{ value: 'Midwest proud',    label: 'Minnesota, USA'   },
+		{ value: 'Midwest proud',    label: 'Chicago, IL'   },
 		{ value: 'Independent',        label: 'Backed by Fyra Labs'    },
 		{ value: 'AS402292', label: 'Since 2026'}
 	] as stat}
@@ -68,7 +68,7 @@
 				Why we exist.
 			</h2>
 			<p class="mt-6 text-base leading-relaxed text-fyra-gray-400">
-				Fyra Labs builds Terra and Ultramarine Linux. We needed servers for that. We couldn't find hosting we'd actually recommend to someone without adding a bunch of caveats. So we started running our own.
+				Fyra Labs builds Terra and Ultramarine Linux. We needed servers for that. We couldn't find hosting we'd actually recommend to someone without adding a bunch of caveats, so we started running our own.
 			</p>
 			<p class="mt-4 text-base leading-relaxed text-fyra-gray-400">
 				Stack is what came out of that. Real hardware, flat pricing, no surprise fees. We charge you for what you use. We don't sell your data, we don't lock you in, and we don't have a "retention team."
@@ -84,9 +84,9 @@
 				<p class="mt-1.5 text-sm text-fyra-gray-500">STACK-XXS · that's actually what it costs.</p>
 			</div>
 			<div class="bg-fyra-gray-900 px-8 py-7">
-				<p class="text-[10px] font-medium uppercase tracking-widest text-fyra-gray-500">Founded</p>
-				<p class="mt-2 text-2xl font-semibold text-fyra-gray-50">2026</p>
-				<p class="mt-1 text-xs text-fyra-gray-500">Minnesota, USA</p>
+				<p class="text-[10px] font-medium uppercase tracking-widest text-fyra-gray-500">Partners</p>
+				<p class="mt-2 text-2xl font-semibold text-fyra-gray-50">DeepComputing</p>
+				<p class="mt-1 text-xs text-fyra-gray-500">Yuning Liang · CEO</p>
 			</div>
 			<div class="bg-fyra-gray-900 px-8 py-7">
 				<p class="text-[10px] font-medium uppercase tracking-widest text-fyra-gray-500">Team size</p>
@@ -98,7 +98,6 @@
 	</div>
 </section>
 
-
 <!-- Team -->
 <section class="">
 	<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
@@ -106,7 +105,7 @@
 		<p class="mt-2 text-sm text-fyra-gray-400">Small, on purpose. Everyone here ships and everyone here answers the support queue.</p>
 	</div>
 
-	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-3">
+	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-2">
 		{#each members as member}
 			<div class="flex items-start gap-4 bg-fyra-gray-900 px-6 py-7 md:px-10">
 				<img

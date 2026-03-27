@@ -14,7 +14,7 @@
 		<span class="text-fyra-red-400">You run your stack.</span>
 		</h2>
 		<p class="text-base text-fyra-gray-400 sm:text-lg/7 max-w-lg mx-auto">
-  Colocation without the enterprise markup, mandatory contracts, or fees for asking questions.
+            Our mission is simple: provide hosting you can trust, without breaking the bank, or your mind.
 		</p>
 	</div>
 

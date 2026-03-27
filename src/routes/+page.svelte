@@ -6,6 +6,10 @@
 	import Pricing from "$lib/components/Pricing.svelte";
 </script>
 
+<svelte:head>
+	<title>Home — Fyra Stack</title>
+</svelte:head>
+
 <Hero />
 <Features />
 <Comparison />
