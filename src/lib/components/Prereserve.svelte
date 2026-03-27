@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { vpsPlans } from '$lib/components/services/vps/VPSPlans.svelte';
 	import { colocationPlans } from '$lib/data/colocationPlans';
+	import { vpsPlans } from '$lib/data/vpsPlans';
+	import { prereserve } from '$lib/remote/prereserve.remote';
+	import type { PrereserveResult } from '$lib/server/prereserve';
 
 	let {
 		selectedPlanName = 'STACK-XXS',
@@ -11,24 +13,48 @@
 		serviceType?: 'vps' | 'colocation';
 	} = $props();
 
-	let plan = $state(selectedPlanName);
+	const formId = $props.id();
+	const reservationForm = prereserve.for(formId);
+
+	let plan = $state('');
 	let name = $state('');
 	let email = $state('');
 	let company = $state('');
 	let currentProvider = $state('');
 	let useCase = $state('');
 
-	let submitting = $state(false);
-	let submitted = $state(false);
+	let submitting = $derived(reservationForm.pending > 0);
+	let submitted = $derived(reservationForm.result?.ok === true);
 
 	let toast = $state<{ type: 'success' | 'error'; title: string; message: string } | null>(null);
 	let toastTimer: ReturnType<typeof setTimeout> | null = null;
+	let lastHandledResult = $state<PrereserveResult | null>(null);
 
 	let planDropdownOpen = $state(false);
 	let planDropdownEl = $state<HTMLDivElement | null>(null);
 
 	$effect(() => {
 		plan = selectedPlanName;
+	});
+
+	$effect(() => {
+		const result = reservationForm.result;
+
+		if (!result || result === lastHandledResult) {
+			return;
+		}
+
+		lastHandledResult = result;
+
+		if (result.ok) {
+			showToast(
+				'success',
+				"You're on the list.",
+				`We got your reservation for ${result.plan} and will be in touch at ${result.email}.`
+			);
+		} else {
+			showToast('error', 'Submission failed.', result.error);
+		}
 	});
 
 	function showToast(type: 'success' | 'error', title: string, message: string) {
@@ -42,32 +68,9 @@
 		toast = null;
 	}
 
-	async function handleSubmit() {
-		submitting = true;
-
-		try {
-			const res = await fetch('/api/prereserve', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ plan, name, email, company, currentProvider, useCase }),
-			});
-
-			if (res.ok) {
-				submitted = true;
-				showToast('success', "You're on the list.", `We got your reservation for ${plan} and will be in touch at ${email}.`);
-			} else {
-				const data = await res.json().catch(() => ({}));
-				showToast('error', 'Submission failed.', data.error ?? 'Something went wrong. Please try again.');
-			}
-		} catch {
-			showToast('error', 'Network error.', 'Could not reach the server. Please try again.');
-		} finally {
-			submitting = false;
-		}
-	}
-
 	const inputClass = "w-full bg-fyra-gray-800 border border-fyra-gray-700 text-fyra-gray-100 placeholder:text-fyra-gray-600 text-sm px-3 py-2.5 focus:outline-none focus:border-fyra-gray-500 transition-colors duration-100 disabled:opacity-40 disabled:cursor-not-allowed";
 	const labelClass = "text-[11px] font-medium uppercase tracking-widest text-fyra-gray-400";
+	const issueClass = 'text-xs text-fyra-red-400';
 </script>
 
 <svelte:window
@@ -118,8 +121,8 @@
 			</div>
 
 			<div class="px-6 py-8 md:px-10">
-
-				<div class="flex flex-col gap-6">
+				<form {...reservationForm} class="flex flex-col gap-6">
+					<input type="hidden" name="plan" value={plan} />
 
 					<!-- Plan -->
 					<div class="flex flex-col gap-2">
@@ -189,6 +192,9 @@
 								</ul>
 							{/if}
 						</div>
+						{#if reservationForm.fields.plan.issues()?.[0]}
+							<p class={issueClass}>{reservationForm.fields.plan.issues()?.[0]?.message}</p>
+						{/if}
 					</div>
 
 					<!-- Name + Email -->
@@ -197,13 +203,19 @@
 							<label for="name" class={labelClass}>
 								Full Name<span class="normal-case tracking-normal text-fyra-red-500">*</span>
 							</label>
-							<input id="name" type="text" bind:value={name} required disabled={submitted} placeholder="Reisen Inaba" class={inputClass} />
+							<input id="name" name="name" type="text" bind:value={name} required disabled={submitted} placeholder="Reisen Inaba" class={inputClass} />
+							{#if reservationForm.fields.name.issues()?.[0]}
+								<p class={issueClass}>{reservationForm.fields.name.issues()?.[0]?.message}</p>
+							{/if}
 						</div>
 						<div class="flex flex-col gap-2">
 							<label for="email" class={labelClass}>
 								Email Address<span class="normal-case tracking-normal text-fyra-red-500">*</span>
 							</label>
-							<input id="email" type="email" bind:value={email} required disabled={submitted} placeholder="reisen@kaguyas.pet" class={inputClass} />
+							<input id="email" name="email" type="email" bind:value={email} required disabled={submitted} placeholder="reisen@kaguyas.pet" class={inputClass} />
+							{#if reservationForm.fields.email.issues()?.[0]}
+								<p class={issueClass}>{reservationForm.fields.email.issues()?.[0]?.message}</p>
+							{/if}
 						</div>
 					</div>
 
@@ -211,25 +223,24 @@
 					<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 						<div class="flex flex-col gap-2">
 							<label for="company" class={labelClass}>Company</label>
-							<input id="company" type="text" bind:value={company} disabled={submitted} placeholder="Gensokyo Inc." class={inputClass} />
+							<input id="company" name="company" type="text" bind:value={company} disabled={submitted} placeholder="Gensokyo Inc." class={inputClass} />
 						</div>
 						<div class="flex flex-col gap-2">
 							<label for="provider" class={labelClass}>{serviceType === 'colocation' ? 'Current Colo Provider' : 'Current Provider'}</label>
-							<input id="provider" type="text" bind:value={currentProvider} disabled={submitted} placeholder="DigitalOcean, Hetzner, OVH..." class={inputClass} />
+							<input id="provider" name="currentProvider" type="text" bind:value={currentProvider} disabled={submitted} placeholder="DigitalOcean, Hetzner, OVH..." class={inputClass} />
 						</div>
 					</div>
 
 					<!-- Use Case -->
 					<div class="flex flex-col gap-2">
 						<label for="usecase" class={labelClass}>Use Case</label>
-						<textarea id="usecase" bind:value={useCase} rows="3" disabled={submitted} placeholder="Tell us what you'll be running…" class="{inputClass} resize-none"></textarea>
+						<textarea id="usecase" name="useCase" bind:value={useCase} rows="3" disabled={submitted} placeholder="Tell us what you'll be running…" class="{inputClass} resize-none"></textarea>
 					</div>
 
 					<!-- Submit -->
 					<div>
 						<button
-							type="button"
-							onclick={handleSubmit}
+							type="submit"
 							disabled={submitting || submitted}
 							class="w-fit border border-fyra-gray-700 bg-fyra-gray-800 px-5 py-2.5 text-sm font-medium text-fyra-gray-50 transition-colors duration-200 hover:border-fyra-red-500 disabled:cursor-not-allowed disabled:opacity-50"
 						>
@@ -243,7 +254,7 @@
 						</button>
 					</div>
 
-				</div>
+				</form>
 			</div>
 		</div>
 
