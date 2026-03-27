@@ -20,7 +20,7 @@
 
 	<!-- Member grid -->
 	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-3">
-		{#each members as member}
+		{#each members as member (member.name)}
 			<div class="flex items-center gap-4 bg-fyra-gray-900 px-6 py-6 md:px-10">
 				<img
 					src={member.avatar}

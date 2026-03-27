@@ -80,7 +80,7 @@
 							<span class="text-sm font-semibold text-fyra-gray-50">Stack</span>
 						</div>
 					</th>
-					{#each competitors as name}
+					{#each competitors as name (name)}
 						<th class="px-5 py-4 text-left text-sm font-medium text-fyra-gray-400">{name}</th>
 					{/each}
 				</tr>
@@ -88,14 +88,14 @@
 
 			<!-- Rows -->
 			<tbody class="divide-y divide-fyra-gray-800">
-				{#each rows as row}
+				{#each rows as row (row.label)}
 					<tr>
 						<!-- Label -->
 						<td class="px-6 py-4 text-sm text-fyra-gray-400 md:px-10">{row.label}</td>
 						<!-- Stack value -->
 						<td class="px-5 py-4 text-sm font-semibold text-fyra-red-400">{row.stack}</td>
 						<!-- Competitor values -->
-						{#each row.values as val}
+						{#each row.values as val, i (`${row.label}-${competitors[i]}`)}
 							<td class="px-5 py-4 text-sm text-fyra-gray-300">{val}</td>
 						{/each}
 					</tr>

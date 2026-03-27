@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { resolve } from '$app/paths';
+</script>
+
 <section class="border-b border-fyra-gray-800">
 	<div
 		class="grid grid-cols-1 divide-y divide-fyra-gray-800 lg:grid-cols-2 lg:divide-x lg:divide-y-0"
@@ -6,7 +10,7 @@
 		<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2">
 			<!-- VPS -->
 			<a
-				href="/services/vps"
+				href={resolve('/services/vps')}
 				class="group flex flex-col bg-fyra-gray-900 p-8 transition-colors duration-100 hover:bg-fyra-gray-800/60"
 			>
 				<p class="text-lg font-semibold text-fyra-gray-50">VPS</p>
@@ -22,7 +26,7 @@
 
 			<!-- Colocation -->
 			<a
-				href="/services/colocation"
+				href={resolve('/services/colocation')}
 				class="group flex flex-col bg-fyra-gray-900 p-8 transition-colors duration-100 hover:bg-fyra-gray-800/60"
 			>
 				<p class="text-lg font-semibold text-fyra-gray-50">Colocation</p>

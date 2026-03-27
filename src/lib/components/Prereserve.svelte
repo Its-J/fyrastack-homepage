@@ -16,7 +16,7 @@
 	const formId = $props.id();
 	const reservationForm = prereserve.for(formId);
 
-	let plan = $state('');
+	let plan = $derived(selectedPlanName);
 	let name = $state('');
 	let email = $state('');
 	let company = $state('');
@@ -32,10 +32,6 @@
 
 	let planDropdownOpen = $state(false);
 	let planDropdownEl = $state<HTMLDivElement | null>(null);
-
-	$effect(() => {
-		plan = selectedPlanName;
-	});
 
 	$effect(() => {
 		const result = reservationForm.result;
@@ -179,13 +175,13 @@
 							>
 								<span>
 									{#if serviceType === 'colocation'}
-										{#each colocationPlans as p}
+										{#each colocationPlans as p (p.name)}
 											{#if p.name === plan}
 												{p.name} — ${p.price}/mo · {p.units}U · {p.power}W · {p.bandwidth}
 											{/if}
 										{/each}
 									{:else}
-										{#each vpsPlans as p}
+										{#each vpsPlans as p (p.name)}
 											{#if p.name === plan}
 												{p.name} — ${p.price}/mo · {p.cpu} vCPU · {p.ram}GB RAM · {p.storage}GB NVMe
 											{/if}
@@ -214,7 +210,7 @@
 									class="absolute top-full right-0 left-0 z-20 mt-px max-h-64 overflow-y-auto border border-fyra-gray-700 bg-fyra-gray-800"
 								>
 									{#if serviceType === 'colocation'}
-										{#each colocationPlans as p}
+										{#each colocationPlans as p (p.name)}
 											<li role="option" aria-selected={plan === p.name}>
 												<button
 													type="button"
@@ -232,7 +228,7 @@
 											</li>
 										{/each}
 									{:else}
-										{#each vpsPlans as p}
+										{#each vpsPlans as p (p.name)}
 											<li role="option" aria-selected={plan === p.name}>
 												<button
 													type="button"

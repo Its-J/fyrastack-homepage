@@ -1,3 +1,7 @@
+<script lang="ts">
+	import { resolve } from '$app/paths';
+</script>
+
 <!-- Hero -->
 <div class="relative isolate overflow-hidden border-b border-fyra-gray-800 px-6 pt-14 lg:px-8">
 	<div
@@ -41,7 +45,7 @@
 				View plans
 			</a>
 			<a
-				href="/prereserve"
+				href={resolve('/prereserve')}
 				class="text-sm text-fyra-gray-400 transition-colors duration-100 hover:text-fyra-gray-200"
 			>
 				Pre-reserve <span aria-hidden="true">→</span>

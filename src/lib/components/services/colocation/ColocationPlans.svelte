@@ -1,7 +1,3 @@
-<script module lang="ts">
-	export { colocationPlans } from '$lib/data/colocationPlans';
-</script>
-
 <script lang="ts">
 	import { colocationPlans } from '$lib/data/colocationPlans';
 
@@ -56,7 +52,7 @@
 </div>
 
 <div class="grid grid-cols-2 divide-x divide-y divide-fyra-gray-800 lg:grid-cols-3">
-	{#each colocationPlans as plan, i}
+	{#each colocationPlans as plan, i (plan.name)}
 		<button
 			onclick={() => (selectedPlanName = plan.name)}
 			class="col-span-1 w-full p-4 text-left duration-200 {selectedPlanName === plan.name

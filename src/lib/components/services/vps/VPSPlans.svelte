@@ -1,7 +1,3 @@
-<script module lang="ts">
-	export { vpsPlans } from '$lib/data/vpsPlans';
-</script>
-
 <script lang="ts">
 	import { vpsPlans } from '$lib/data/vpsPlans';
 
@@ -60,7 +56,7 @@
 </div>
 
 <div class="grid grid-cols-2 divide-x divide-y divide-fyra-gray-800 lg:grid-cols-4">
-	{#each vpsPlans as plan, i}
+	{#each vpsPlans as plan, i (plan.name)}
 		<button
 			onclick={() => (selectedPlanName = plan.name)}
 			class="col-span-1 w-full p-4 text-left duration-200 {selectedPlanName === plan.name

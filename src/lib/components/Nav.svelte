@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { fade, slide } from 'svelte/transition';
 
 	let isMobileMenuOpen = $state(false);
@@ -48,7 +49,7 @@
 		>
 			<!-- Logo -->
 			<a
-				href="/"
+				href={resolve('/')}
 				class="flex shrink-0 items-center gap-1.5 rounded-xs px-1 py-1 transition-colors duration-100 hover:bg-fyra-gray-800"
 			>
 				<img src="/logo.svg" alt="Fyra Stack" class="h-5 w-5" />
@@ -91,9 +92,9 @@
 							transition:fade={{ duration: 100 }}
 							class="absolute top-full right-0 mt-2.5 w-64 overflow-hidden rounded-xs border border-fyra-gray-800 bg-fyra-gray-900 shadow-sm shadow-fyra-gray-950/80"
 						>
-							{#each servicesItems as item}
+							{#each servicesItems as item (item.href)}
 								<a
-									href={item.href}
+									href={resolve(item.href)}
 									onclick={closeAll}
 									class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
 								>
@@ -147,15 +148,27 @@
 							transition:fade={{ duration: 100 }}
 							class="absolute top-full right-0 mt-2.5 w-56 overflow-hidden rounded-xs border border-fyra-gray-800 bg-fyra-gray-900 shadow-sm shadow-fyra-gray-950/80"
 						>
-							{#each aboutItems as item}
-								<a
-									href={item.href}
-									onclick={closeAll}
-									class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
-								>
-									<span class="text-[13px] font-medium text-fyra-gray-100">{item.label}</span>
-									<span class="text-[12px] text-fyra-gray-300">{item.description}</span>
-								</a>
+							{#each aboutItems as item (item.href)}
+								{#if item.href.startsWith('/')}
+									<a
+										href={resolve(item.href)}
+										onclick={closeAll}
+										class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
+									>
+										<span class="text-[13px] font-medium text-fyra-gray-100">{item.label}</span>
+										<span class="text-[12px] text-fyra-gray-300">{item.description}</span>
+									</a>
+								{:else}
+									<a
+										href={item.href}
+										onclick={closeAll}
+										rel="external"
+										class="flex flex-col gap-0.5 px-3.5 py-3 transition-colors duration-100 hover:bg-fyra-gray-800"
+									>
+										<span class="text-[13px] font-medium text-fyra-gray-100">{item.label}</span>
+										<span class="text-[12px] text-fyra-gray-300">{item.description}</span>
+									</a>
+								{/if}
 							{/each}
 						</div>
 					{/if}
@@ -228,9 +241,9 @@
 	>
 		<div class="flex flex-col gap-0.5">
 			<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-fyra-gray-400 uppercase">Services</p>
-			{#each servicesItems as item}
+			{#each servicesItems as item (item.href)}
 				<a
-					href={item.href}
+					href={resolve(item.href)}
 					onclick={closeAll}
 					class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
 					>{item.label}</a
@@ -246,13 +259,23 @@
 			<div class="my-1.5 border-t border-fyra-gray-800"></div>
 
 			<p class="px-3 pt-1 pb-0.5 text-[11px] font-medium text-fyra-gray-400 uppercase">About</p>
-			{#each aboutItems as item}
-				<a
-					href={item.href}
-					onclick={closeAll}
-					class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
-					>{item.label}</a
-				>
+			{#each aboutItems as item (item.href)}
+				{#if item.href.startsWith('/')}
+					<a
+						href={resolve(item.href)}
+						onclick={closeAll}
+						class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
+						>{item.label}</a
+					>
+				{:else}
+					<a
+						href={item.href}
+						onclick={closeAll}
+						rel="external"
+						class="rounded-xs px-3 py-2 text-sm text-fyra-gray-200 transition-colors duration-100 hover:bg-fyra-gray-800 hover:text-fyra-gray-100"
+						>{item.label}</a
+					>
+				{/if}
 			{/each}
 		</div>
 	</div>

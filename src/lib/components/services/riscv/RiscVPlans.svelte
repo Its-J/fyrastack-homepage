@@ -1,7 +1,3 @@
-<script module lang="ts">
-	export { riscvPlans } from '$lib/data/riscvPlans';
-</script>
-
 <script lang="ts">
 	import { riscvPlans } from '$lib/data/riscvPlans';
 
@@ -68,7 +64,7 @@
 </div>
 
 <div class="grid grid-cols-2 divide-x divide-y divide-fyra-gray-800 lg:grid-cols-4">
-	{#each riscvPlans as plan, i}
+	{#each riscvPlans as plan, i (plan.name)}
 		<button
 			onclick={() => (selectedPlanName = plan.name)}
 			class="col-span-1 w-full p-4 text-left duration-200 {selectedPlanName === plan.name

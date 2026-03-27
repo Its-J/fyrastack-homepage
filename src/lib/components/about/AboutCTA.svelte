@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
 	import { team } from '$lib/data/team';
 
 	const members = team.filter((m) => m !== null);
@@ -34,7 +35,7 @@
 			</p>
 		</div>
 		<a
-			href="/about"
+			href={resolve('/about')}
 			class="shrink-0 text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
 		>
 			Meet the team <span aria-hidden="true">→</span>
@@ -43,8 +44,8 @@
 
 	<!-- Portraits -->
 	<div class="grid gap-px bg-fyra-gray-800 {colClass}">
-		{#each members as member}
-			<a href="/about" class="group relative block overflow-hidden bg-fyra-gray-900">
+		{#each members as member (member.name)}
+			<a href={resolve('/about')} class="group relative block overflow-hidden bg-fyra-gray-900">
 				<!-- Photo -->
 				<div class="relative aspect-[3/4] overflow-hidden">
 					<img

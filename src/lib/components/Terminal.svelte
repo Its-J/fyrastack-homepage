@@ -187,7 +187,7 @@
 			bind:this={termEl}
 			class="scrollbar-none h-96 overflow-y-auto px-5 py-4 font-mono text-sm leading-relaxed"
 		>
-			{#each lines as line}
+			{#each lines as line, i (`${line.kind}-${i}`)}
 				{#if line.kind === 'blank'}
 					<div class="h-3"></div>
 				{:else if line.kind === 'cmd'}

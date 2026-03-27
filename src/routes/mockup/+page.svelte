@@ -54,7 +54,7 @@
 			<img src="/logo.svg" alt="" class="h-4 w-4" />
 		</div>
 		<nav class="flex w-full flex-1 flex-col gap-0.5 p-1.5">
-			{#each [{ icon: 'M3 5h10M3 8h10M3 11h6', active: false }, { icon: 'M2 4h12v8H2zM5 12v2M9 12v2M4 14h8', active: true }, { icon: 'M8 2L2 5v4c0 3.5 2.5 5.5 6 7 3.5-1.5 6-3.5 6-7V5L8 2z', active: false }, { icon: 'M2 10h12v4H2zM2 6h12v4H2zM2 2h12v4H2z', active: false }, { icon: 'M2 4h12v10H2zM2 7h12', active: false }, { icon: 'M8 5a3 3 0 100 6 3 3 0 000-6zM1 8h2M11 8h2M8 1v2M8 11v2', active: false }] as item}
+			{#each [{ icon: 'M3 5h10M3 8h10M3 11h6', active: false }, { icon: 'M2 4h12v8H2zM5 12v2M9 12v2M4 14h8', active: true }, { icon: 'M8 2L2 5v4c0 3.5 2.5 5.5 6 7 3.5-1.5 6-3.5 6-7V5L8 2z', active: false }, { icon: 'M2 10h12v4H2zM2 6h12v4H2zM2 2h12v4H2z', active: false }, { icon: 'M2 4h12v10H2zM2 7h12', active: false }, { icon: 'M8 5a3 3 0 100 6 3 3 0 000-6zM1 8h2M11 8h2M8 1v2M8 11v2', active: false }] as item (item.icon)}
 				<a
 					href="#"
 					class="flex items-center justify-center p-2 transition-colors duration-100
@@ -124,7 +124,7 @@
 					</p>
 				</div>
 				<div class="divide-y divide-fyra-gray-800">
-					{#each servers as server, i}
+					{#each servers as server, i (server.name)}
 						<button
 							type="button"
 							onclick={() => (activeServer = i)}
@@ -183,7 +183,7 @@
 
 				<!-- Stats row -->
 				<div class="grid grid-cols-3 gap-px bg-fyra-gray-800">
-					{#each [{ label: 'CPU Usage', value: servers[activeServer].cpu, unit: '%' }, { label: 'RAM Usage', value: servers[activeServer].ram, unit: '%' }, { label: 'Disk Usage', value: servers[activeServer].disk, unit: '%' }] as stat}
+					{#each [{ label: 'CPU Usage', value: servers[activeServer].cpu, unit: '%' }, { label: 'RAM Usage', value: servers[activeServer].ram, unit: '%' }, { label: 'Disk Usage', value: servers[activeServer].disk, unit: '%' }] as stat (stat.label)}
 						<div class="bg-fyra-gray-900 px-6 py-5">
 							<p class="text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">
 								{stat.label}
@@ -212,7 +212,7 @@
 							</p>
 						</div>
 						<div class="divide-y divide-fyra-gray-800">
-							{#each [{ label: 'IPv4', value: servers[activeServer].ip }, { label: 'IPv6', value: '2001:db8::1' }, { label: 'Bandwidth', value: '1 Gbps fair-use' }, { label: 'TX this mo.', value: '183 GB' }, { label: 'RX this mo.', value: '41 GB' }] as row}
+							{#each [{ label: 'IPv4', value: servers[activeServer].ip }, { label: 'IPv6', value: '2001:db8::1' }, { label: 'Bandwidth', value: '1 Gbps fair-use' }, { label: 'TX this mo.', value: '183 GB' }, { label: 'RX this mo.', value: '41 GB' }] as row (row.label)}
 								<div class="flex items-center justify-between px-6 py-2.5">
 									<span class="text-[12px] text-fyra-gray-500">{row.label}</span>
 									<span class="font-mono text-[12px] text-fyra-gray-200">{row.value}</span>
@@ -229,7 +229,7 @@
 							</p>
 						</div>
 						<div class="divide-y divide-fyra-gray-800">
-							{#each events as ev}
+							{#each events as ev (`${ev.time}-${ev.msg}`)}
 								<div class="flex items-start gap-4 px-6 py-2.5">
 									<span class="shrink-0 pt-px font-mono text-[10px] text-fyra-gray-600"
 										>{ev.time}</span
@@ -243,7 +243,7 @@
 
 				<!-- Specs -->
 				<div class="grid grid-cols-4 gap-px bg-fyra-gray-800">
-					{#each [{ label: 'vCPUs', value: '2 cores' }, { label: 'RAM', value: '4 GB' }, { label: 'Storage', value: '80 GB NVMe' }, { label: 'OS', value: 'Ultramarine 41' }] as spec}
+					{#each [{ label: 'vCPUs', value: '2 cores' }, { label: 'RAM', value: '4 GB' }, { label: 'Storage', value: '80 GB NVMe' }, { label: 'OS', value: 'Ultramarine 41' }] as spec (spec.label)}
 						<div class="bg-fyra-gray-900 px-6 py-4">
 							<p class="text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">
 								{spec.label}

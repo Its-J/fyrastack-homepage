@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
 	const year = new Date().getFullYear();
 
 	const columns = [
@@ -39,7 +41,7 @@
 			<div class="px-6">
 				<!-- Left: logo + meta -->
 				<div class="shrink-0 lg:w-72">
-					<a href="/" class="inline-flex items-center gap-1.5">
+					<a href={resolve('/')} class="inline-flex items-center gap-1.5">
 						<img src="/logo.svg" alt="Fyra Stack" class="h-7 w-7" />
 						<span class="text-xl font-semibold tracking-tight text-fyra-gray-50">Stack</span>
 					</a>
@@ -67,22 +69,39 @@
 
 			<!-- Right: link columns -->
 			<div class="grid grid-cols-2 gap-x-8 gap-y-10 px-6 sm:grid-cols-4 lg:flex-1">
-				{#each columns as col}
+				{#each columns as col (col.heading)}
 					<div>
 						<p class="text-sm font-semibold text-fyra-gray-50">{col.heading}</p>
 						<ul class="mt-4 flex flex-col gap-2.5">
-							{#each col.links as link}
+							{#each col.links as link (link.label)}
 								<li>
-									<a
-										href={link.href}
-										class="inline-flex items-center gap-0.5 text-sm text-fyra-gray-400 transition-colors duration-100 hover:text-fyra-gray-100"
-										target={link.external ? '_blank' : undefined}
-										rel={link.external ? 'noopener noreferrer' : undefined}
-									>
-										{link.label}{#if link.external}<span
-												class="text-[11px] leading-none text-fyra-gray-500">↗</span
-											>{/if}
-									</a>
+									{#if link.external}
+										<a
+											href={link.href}
+											class="inline-flex items-center gap-0.5 text-sm text-fyra-gray-400 transition-colors duration-100 hover:text-fyra-gray-100"
+											target="_blank"
+											rel="external noopener noreferrer"
+										>
+											{link.label}{#if link.external}<span
+													class="text-[11px] leading-none text-fyra-gray-500">↗</span
+												>{/if}
+										</a>
+									{:else if !link.href.startsWith('/')}
+										<a
+											href={link.href}
+											rel="external"
+											class="inline-flex items-center gap-0.5 text-sm text-fyra-gray-400 transition-colors duration-100 hover:text-fyra-gray-100"
+										>
+											{link.label}
+										</a>
+									{:else}
+										<a
+											href={resolve(link.href)}
+											class="inline-flex items-center gap-0.5 text-sm text-fyra-gray-400 transition-colors duration-100 hover:text-fyra-gray-100"
+										>
+											{link.label}
+										</a>
+									{/if}
 								</li>
 							{/each}
 						</ul>

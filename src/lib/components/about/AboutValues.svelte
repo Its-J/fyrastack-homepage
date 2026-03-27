@@ -39,7 +39,7 @@
 
 	<!-- Value cards -->
 	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-3">
-		{#each values as value}
+		{#each values as value (value.label)}
 			<div class="bg-fyra-gray-900 px-6 py-8 md:px-10">
 				<p class="text-sm font-semibold text-fyra-gray-50">
 					<span class="mr-1.5 text-fyra-red-500" aria-hidden="true">·</span>{value.label}.

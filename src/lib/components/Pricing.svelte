@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { resolve } from '$app/paths';
+
 	const plans = [
 		{
 			name: 'Virtual Private Servers',
@@ -63,7 +65,7 @@
 						<p class="mt-1 text-sm text-fyra-gray-400">{plan.description}</p>
 					</div>
 					<a
-						href={`/services/${plan.slug}`}
+						href={resolve(`/services/${plan.slug}`)}
 						class="shrink-0 text-sm font-medium text-fyra-red-400 transition-colors duration-100 hover:text-fyra-red-300"
 					>
 						View plans <span aria-hidden="true">→</span>
