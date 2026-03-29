@@ -7,6 +7,22 @@
 
 <svelte:head>
 	<title>Fyra Stack</title>
+
+	<!-- Privacy-friendly analytics by Plausible -->
+	<script async src="https://plausible.fyralabs.com/js/pa-NskcgvpEiDLVGaxFEpNHl.js"></script>
+	<script>
+		((window.plausible =
+			window.plausible ||
+			function () {
+				(plausible.q = plausible.q || []).push(arguments);
+			}),
+			(plausible.init =
+				plausible.init ||
+				function (i) {
+					plausible.o = i || {};
+				}));
+		plausible.init();
+	</script>
 </svelte:head>
 
 <div class="mx-4">
