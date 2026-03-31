@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { team } from '$lib/data/team';
 	const members = team.filter((m) => m !== null);
+	const memberCount = members.filter((m) => m.name !== '').length;
 
 	function displayName(m: (typeof members)[number]) {
 		if (!m.nickname) return m.name;
@@ -104,7 +105,7 @@
 				<p class="text-[10px] font-medium tracking-widest text-fyra-gray-500 uppercase">
 					Team size
 				</p>
-				<p class="mt-2 text-2xl font-semibold text-fyra-gray-50">{members.length} people</p>
+				<p class="mt-2 text-2xl font-semibold text-fyra-gray-50">{memberCount} people</p>
 				<p class="mt-1 text-xs text-fyra-gray-500">Small, on purpose.</p>
 			</div>
 		</div>
@@ -123,11 +124,13 @@
 	<div class="grid grid-cols-1 gap-px bg-fyra-gray-800 sm:grid-cols-2 lg:grid-cols-2">
 		{#each members as member (member.name)}
 			<div class="flex items-start gap-4 bg-fyra-gray-900 px-6 py-7 md:px-10">
-				<img
-					src={member.avatar}
-					alt={member.name}
-					class="h-10 w-10 shrink-0 rounded-xs object-cover object-center brightness-90"
-				/>
+				{#if member.avatar}
+					<img
+						src={member.avatar}
+						alt={member.name}
+						class="h-10 w-10 shrink-0 rounded-xs object-cover object-center brightness-90"
+					/>
+				{/if}
 				<div class="min-w-0 flex-1 pt-0.5">
 					<p class="text-sm font-semibold text-fyra-gray-50">{displayName(member)}</p>
 					<p class="mt-0.5 text-[11px] font-medium tracking-widest text-fyra-gray-500 uppercase">
