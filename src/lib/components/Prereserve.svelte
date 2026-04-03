@@ -146,11 +146,12 @@
 		<div>
 			<div class="border-b border-fyra-gray-800 px-6 py-8 md:px-10">
 				<h2 class="text-3xl font-semibold tracking-tight text-fyra-gray-50 md:text-4xl">
-					{serviceType === 'colocation' ? 'Pre-reserve your colocation.' : 'Pre-reserve your VPS.'}
+					{serviceType === 'colocation' ? 'Sign up for colocation.' : 'Pre-reserve your VPS.'}
 				</h2>
 				<p class="mt-2 text-sm text-fyra-gray-400">
-					We're in the early access phase, submit your info and we'll reach out when your plan is
-					ready. Expected to launch by May 1st, 2026.
+					{serviceType === 'colocation'
+						? "Contact us below and we'll reach out to help assist with getting your server racked today."
+						: "We're in the early access phase, submit your info and we'll reach out when your plan is ready. Expected to launch by May 1st, 2026."}
 				</p>
 			</div>
 
@@ -323,7 +324,9 @@
 								type="text"
 								bind:value={currentProvider}
 								disabled={submitted}
-								placeholder="DigitalOcean, Hetzner, OVH..."
+								placeholder={serviceType === 'colocation'
+									? "Cirno's Perfect Colocation Inc."
+									: 'Digital Ocean, Hetzner, OVH...'}
 								class={inputClass}
 							/>
 						</div>
