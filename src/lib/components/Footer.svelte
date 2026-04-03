@@ -8,7 +8,13 @@
 	const columns = [
 		{
 			heading: 'Product',
-			links: [{ label: 'Status', href: 'https://status.fyralabs.com/', external: true }]
+			links: [
+				{ label: 'Status', href: 'https://status.fyralabs.com/', external: true },
+				{
+					label: 'Docs',
+					href: '/docs'
+				}
+			]
 		},
 		{
 			heading: 'Resources',

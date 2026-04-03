@@ -31,7 +31,9 @@
 		class="flex items-center justify-center gap-2 bg-fyra-red-600 px-4 py-2.5 text-center text-sm font-medium text-fyra-gray-50 transition-colors hover:bg-fyra-red-600"
 	>
 		<span class="font-semibold">Colocation is here.</span>
-		<span class="text-fyra-red-200">Launching April 13th, ship your servers now.</span>
+		<span class="text-fyra-red-200"
+			>Launching April 13th, get 1U colocation at just $50/mo! Ship your servers now.</span
+		>
 		<span class="text-fyra-red-300">→</span>
 	</a>
 	<Nav />

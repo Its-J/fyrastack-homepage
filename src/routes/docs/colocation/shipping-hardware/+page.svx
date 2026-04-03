@@ -1,0 +1,85 @@
+<svelte:head>
+	<title>Shipping Hardware to Us — Fyra Stack Docs</title>
+</svelte:head>
+
+# Shipping Hardware to Us.
+
+Before your server can go live in our Chicago DC, we need to receive it at our office location. This document covers how to pack, label, and ship your hardware so it arrives safely and gets racked without delays.
+
+---
+
+## 1. Before You Ship.
+
+Contact us before sending anything. We'll confirm your colocation slot is ready, assign you a rack unit, and give you a receive authorization number (RAN) to include with your shipment. **Shipments arriving without a RAN may be refused or delayed.**
+
+To get started, [fill out our colocation intake form](/services/colocation) or email Katherine Cole at [kat@fyrastack.com](mailto:kat@fyrastack.com).
+
+---
+
+## 2. Shipping Address.
+
+Send hardware to:
+
+**Fyra Stack Limited**
+5206 N Damen Ave
+Chicago, IL 60625
+
+Include your **RAN** and your **name or company name** on the outside of every box.
+
+---
+
+## 3. Packing Your Server.
+
+### Use the original packaging if you have it.
+
+Original server packaging is designed for exactly this. If you still have the box and foam inserts, use them.
+
+### If you don't have original packaging.
+
+- Use a double-walled corrugated box sized to fit snugly around the server.
+- Wrap the server in at least 2 inches of foam or bubble wrap on all sides.
+- Fill any empty space with packing peanuts or air pillows — servers should not shift inside the box.
+- Do not ship with loose components (RAM sticks, drives) unless they are secured. Bag and tape them separately inside the box.
+
+### Rails and accessories.
+
+You must ship OEM rack rails (please don't send us generic rails) and other accessories with your server pack them in a separate box. Label it with the same RAN and mark it as a companion shipment.
+
+---
+
+## 4. What to Include.
+
+Ship the following with your hardware:
+
+### A printed packing slip.
+
+Include a sheet inside the box with your name, contact email, RAN, and a brief description of the hardware (make, model, number of drives, number of PSUs).
+
+### Power cables.
+
+Include at least two IEC NEMA C13 to C14 power distribution cables that are at least 6ft long. If we need to acquire power cables for your server, we can do that, but at an additional charge.
+
+### Any KVM or console adapters.
+
+If your server requires a special adapter for the serial console or VGA, include it. We use standard VGA and USB, but some servers need dongles.
+
+---
+
+## 5. Carriers and Insurance.
+
+We recommend shipping with **FedEx** or **UPS** with full declared value insurance and signature required on delivery. For high-value hardware (over $2,000), we strongly recommend freight or white-glove shipping.
+
+Keep your tracking number. We'll confirm receipt via email once your shipment is logged in, typically within one business day of arrival.
+
+---
+
+## 6. After We Receive It.
+
+Once your server arrives:
+
+1. We inspect it for visible shipping damage.
+2. We power it on briefly on a bench to verify POST.
+3. We rack it in your assigned slot, cable it up, and connect it to your assigned PDU outlets.
+4. We email you with your VPN information, IPMI/iDRAC address, assigned IP block, and confirmation that the server is online.
+
+From there, you have full remote access. See [Accessing IPMI Remotely](/docs/colocation/ipmi) for next steps.
