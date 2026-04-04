@@ -8,7 +8,7 @@
 	}[] = [
 		{
 			label: 'Entry price',
-			stack: '$50/mo',
+			stack: '<span class="line-through text-fyra-gray-500 mr-1.5">$60</span>$50/mo',
 			values: ['$200+/mo', '$80+/mo', '$0+/mo*']
 		},
 		{
@@ -74,7 +74,7 @@
 				{#each rows as row (row.label)}
 					<tr>
 						<td class="px-6 py-4 text-sm text-fyra-gray-400 md:px-10">{row.label}</td>
-						<td class="px-5 py-4 text-sm font-semibold text-fyra-red-400">{row.stack}</td>
+						<td class="px-5 py-4 text-sm font-semibold text-fyra-red-400">{@html row.stack}</td>
 						{#each row.values as val, i (`${row.label}-${competitors[i]}`)}
 							<td class="px-5 py-4 text-sm text-fyra-gray-300">{val}</td>
 						{/each}
