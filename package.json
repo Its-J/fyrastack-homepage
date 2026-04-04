@@ -47,6 +47,7 @@
 		"@tailwindplus/elements": "^1.0.22",
 		"arktype": "^2.2.0",
 		"autumn-js": "^1.2.4",
-		"leaflet": "^1.9.4"
+		"leaflet": "^1.9.4",
+		"svix": "^1.90.0"
 	}
 }
