@@ -102,3 +102,15 @@
 		</button>
 	{/each}
 </div>
+
+<div class="border-b border-fyra-gray-800 px-5 py-3 text-center">
+	<p class="text-xs text-fyra-gray-400">
+		Need something custom?
+		<a
+			href="mailto:contact@fyrastack.com"
+			class="text-fyra-red-400 transition-colors hover:text-fyra-red-300"
+			>Contact us</a
+		>
+		for bulk orders and non-profit discounts.
+	</p>
+</div>
