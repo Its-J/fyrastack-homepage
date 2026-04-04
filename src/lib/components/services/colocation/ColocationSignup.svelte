@@ -38,7 +38,7 @@
 5206 N Damen Ave
 Chicago, IL 60625`;
 
-	const DOCS_LINK = '/docs/colocation';
+	const DOCS_LINK = '/docs';
 
 	const inputClass =
 		'w-full bg-fyra-gray-800 border border-fyra-gray-700 text-fyra-gray-100 placeholder:text-fyra-gray-600 text-sm px-3 py-2.5 focus:outline-none focus:border-fyra-gray-500 transition-colors duration-100 disabled:opacity-40 disabled:cursor-not-allowed';
@@ -134,7 +134,13 @@ Chicago, IL 60625`;
 									{/if}
 								{/each}
 							</span>
-							<Icon src={ChevronDown} class="ml-2 h-3.5 w-3.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {planDropdownOpen ? 'rotate-180' : ''}" aria-hidden="true" />
+							<Icon
+								src={ChevronDown}
+								class="ml-2 h-3.5 w-3.5 shrink-0 text-fyra-gray-400 transition-transform duration-150 {planDropdownOpen
+									? 'rotate-180'
+									: ''}"
+								aria-hidden="true"
+							/>
 						</button>
 
 						{#if planDropdownOpen}
