@@ -3,6 +3,7 @@
 	import ColocationFeatures from '$lib/components/services/colocation/ColocationFeatures.svelte';
 	import ColocationComparison from '$lib/components/services/colocation/ColocationComparison.svelte';
 	import ColocationPlans from '$lib/components/services/colocation/ColocationPlans.svelte';
+	import ColocationDocsLink from '$lib/components/services/colocation/ColocationDocsLink.svelte';
 	import ColocationSignup from '$lib/components/services/colocation/ColocationSignup.svelte';
 </script>
 
@@ -19,5 +20,7 @@
 <ColocationComparison />
 
 <ColocationPlans />
+
+<ColocationDocsLink />
 
 <ColocationSignup />

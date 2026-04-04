@@ -24,6 +24,14 @@
 		<p class="mx-auto max-w-lg text-base text-fyra-gray-400 sm:text-lg/7">
 			Colocation without the enterprise markup, mandatory contracts, or fees for asking questions.
 		</p>
+		<div class="mt-10 flex items-center justify-center gap-x-6">
+			<a
+				href="#signup"
+				class="rounded-md bg-fyra-red-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-fyra-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fyra-red-500"
+			>
+				Get started
+			</a>
+		</div>
 	</div>
 
 	<div

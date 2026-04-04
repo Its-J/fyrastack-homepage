@@ -53,7 +53,7 @@ Chicago, IL 60625`;
 	}}
 />
 
-<section class="relative">
+<section class="relative" id="signup">
 	<!-- Payment Complete Overlay (shown after returning from Autumn) -->
 	{#if showSuccess}
 		<div
@@ -65,19 +65,23 @@ Chicago, IL 60625`;
 					<div
 						class="flex h-10 w-10 items-center justify-center rounded-full bg-fyra-red-500/20 text-fyra-red-400"
 					>
-						<svg class="h-5 w-5" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+						<svg
+							class="h-5 w-5"
+							viewBox="0 0 16 16"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="1.5"
+						>
 							<path d="M13.5 4.5 6.5 11.5 3 8" stroke-linecap="round" stroke-linejoin="round" />
 						</svg>
 					</div>
-					<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">
-						Payment complete!
-					</h2>
+					<h2 class="text-2xl font-semibold tracking-tight text-fyra-gray-50">Payment complete!</h2>
 				</div>
 
 				<div class="space-y-6">
 					<div>
 						<h3 class="text-sm font-medium text-fyra-gray-300">Shipping Address</h3>
-						<p class="mt-2 whitespace-pre-wrap text-sm text-fyra-gray-400">{SHIPPING_ADDRESS}</p>
+						<p class="mt-2 text-sm whitespace-pre-wrap text-fyra-gray-400">{SHIPPING_ADDRESS}</p>
 					</div>
 
 					<div>
@@ -91,8 +95,14 @@ Chicago, IL 60625`;
 							class="mt-3 inline-flex items-center gap-2 text-sm text-fyra-red-400 transition-colors hover:text-fyra-red-300"
 						>
 							View Colocation Docs
-							<svg class="h-3.5 w-3.5" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5">
-								<path d="M2 8 6 4M6 4 2 0M6 4h8" stroke-linecap="round" stroke-linejoin="round"/>
+							<svg
+								class="h-3.5 w-3.5"
+								viewBox="0 0 10 10"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="1.5"
+							>
+								<path d="M2 8 6 4M6 4 2 0M6 4h8" stroke-linecap="round" stroke-linejoin="round" />
 							</svg>
 						</a>
 					</div>
