@@ -4,7 +4,7 @@
 
 # Requesting Remote Hands.
 
-Remote hands is physical assistance from our team at the data center. Plugging in cables, swapping drives, power cycling equipment, or anything else that requires someone to be physically present at your server. We will always ask for your explicit permission before touching your hardware.
+Remote hands is physical assistance from our team at the data center; plugging in cables, swapping drives, power cycling equipment, or anything else that requires someone to be physically present at your server. We will always ask for your explicit permission before performing hands‑on maintenance.
 
 ---
 
@@ -25,7 +25,7 @@ Remote hands is included with all colocation plans for routine tasks at a rate o
 
 ## 2. How to Request.
 
-Email [support@fyrastack.com](mailto:support@fyrastack.com) with the subject line **Remote Hands Request** and include:
+[Email support@fyrastack.com](mailto:support@fyrastack.com?subject=Remote%20Hands%20Request) with the subject line **Remote Hands Request** and include:
 
 ### What we need to know.
 
@@ -34,7 +34,7 @@ Email [support@fyrastack.com](mailto:support@fyrastack.com) with the subject lin
 - Whether timing is urgent or flexible
 - Any credentials or instructions needed to verify success (e.g. "confirm the server responds to ping at 192.0.2.10 after power-on")
 
-The more specific your instructions, the faster and more accurately we can complete the task.
+The more specific your instructions, the faster and more accurately we will complete your tasks.
 
 ---
 
@@ -52,7 +52,7 @@ For hardware failures or situations affecting production, mark your email as urg
 
 ## 4. What We Won't Do Without Explicit Permission.
 
-In line with our [Privacy Statement](/privacy-statement), we will not:
+In line with our [Privacy Statement](/privacy-statement), we will **never**:
 
 - Access, read, or copy data on your drives
 - Boot into or interact with your operating system
