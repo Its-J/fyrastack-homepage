@@ -18,9 +18,9 @@ Before your server can go live in our Chicago DC, we need to receive it at our o
 
 Send hardware to:
 
-**Fyra Stack Limited**
-5206 N Damen Ave
-Chicago, IL 60625
+**Fyra Stack Limited** <br>
+5206 N Damen Ave <br>
+Chicago, IL 60625 
 
 Include your **RAN** and your **name or company name** on the outside of every box.
 
