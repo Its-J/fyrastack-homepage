@@ -54,7 +54,8 @@
 						<span class="text-xl font-semibold tracking-tight text-fyra-gray-50">Stack</span>
 					</a>
 
-					<p class="mt-4 mb-9 text-sm text-fyra-gray-400">Fyra Stack Limited © {year}</p>
+					<p class="mt-4 text-sm text-fyra-gray-300">Fyra Stack Limited © {year}</p>
+					<p class="mt-0.5 mb-9 text-xs text-fyra-gray-400">5206 N Damen Ave, Chicago, IL 60625</p>
 
 					<div class="mt-4 flex flex-col gap-2">
 						<div class="flex items-center gap-2 text-sm text-fyra-gray-400">
